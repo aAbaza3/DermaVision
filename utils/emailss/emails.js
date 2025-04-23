@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import asyncHandler from 'express-async-handler';
 import transporter from './nodemailerConfig.js';
-import { PASSWORD_RESET_REQUEST_TEMPLATE } from './emailTemplates.js';
+import { PASSWORD_RESET_REQUEST_TEMPLATE,EMAIL_VERIFICATION_TEMPLATE } from './emailTemplates.js';
 
 // export const sendVerificationEmail = asyncHandler(async (isEmail, verificationToken) => {
 
@@ -17,7 +17,7 @@ export const sendPasswordResetEmail = asyncHandler(async (to, username, resetCod
         .replace('{resetCode}', resetCode);
 
     const mailOptions = {
-        from: `DermVision <${process.env.USER_EMAIL}>`,
+        from: `DermVision <${process.env.Email_USER}>`,
         to: to,
         subject: 'Password Reset Code (Valid for 10 min)',
         html: updatedHtml,
@@ -40,7 +40,7 @@ export const sendVerificationEmail = asyncHandler(async (to, username, verificat
         .replace('{verificationCode}', verificationCode);
 
     const mailOptions = {
-        from: `Azir E-commerce <${process.env.USER_EMAIL}>`,
+        from: `DermaVision <${process.env.Email_USER}>`,
         to: to,
         subject: 'Email Verification Code (Valid for 1 hour)',
         html: updatedHtml,

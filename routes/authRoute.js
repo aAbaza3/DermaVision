@@ -1,4 +1,3 @@
-
 import express from "express"
 import {
   signUp,
@@ -6,7 +5,9 @@ import {
   forgetPassword,
   verifyResetToken,
   resetPassword,
+  verifyEmail
 }  from "../controllers/auth.js"
+
 
 const router = express.Router();
 
@@ -22,8 +23,10 @@ router.route('/forgetPassword')
 // Forget Password
 router.route('/verifyResetToken')
 .post(verifyResetToken);
+router.route('/verify-email')
+    .post(verifyEmail)
 // Forget Password
 router.route('/resetPassword')
 .post(resetPassword);
 
-export default  router;
+export default router;
