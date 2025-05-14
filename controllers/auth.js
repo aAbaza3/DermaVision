@@ -9,43 +9,6 @@ import { sendPasswordResetEmail, sendVerificationEmail } from '../utils/emailss/
 import User from '../models/user.js';
 import ApiError from '../utils/apiError.js';
 
-// // @desc    Sign Up
-// // @route   POST/api/v1/auth/signup
-// // @access  Public
-//   export const signUp = asyncHandler(async(req,res,next) =>{
-//     try{
-//         const {name , phone , email , password , confirmPassword } = req.body;
-
-//         if(password != confirmPassword){
-//           return next(new ApiError('Password Confirmation does not match', 400));
-//         }
-
-
-
-//         //const createProfilePicture= await cloudinary.uploader.upload(profile_picture);
-// const user = await User.create({
-//     name,
-//     phone,
-//     email,
-//     password
-
-// });
-
-// if(user){
-//   const token = generateToken(user._id,res);
-//   res.status(201).json({
-//     message: 'Sign Up Successfully',
-//     data : user,
-//     token
-//   });
-//         }else{
-//           return next(new ApiError('Invalid user data', 404));
-//         }
-//         } catch (err) {
-//             console.log(err);
-//             return next(new ApiError('Server Error',500));
-//           }
-// })
 
 export const signUp = asyncHandler(async (req, res, next) => {
 

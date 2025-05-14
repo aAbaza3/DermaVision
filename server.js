@@ -2,11 +2,26 @@ import express  from 'express'
 import dotenv  from 'dotenv/config'
 import connectDb from './config/db.js'
 import auth from'./routes/authRoute.js'
+import questionRoute from './routes/questionRoute.js';
+import cors from "cors";
 
 connectDb();
 const app = express()
+
+// Middleware
+app.use(cors());
 app.use(express.json());
+
+//Routes
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/questions', questionRoute);
+
+// Error handling middleware (recommended)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
+
 const port = 8080 || process.env.PORT 
 
 app.listen(port, () => console.log(`Server Running on port ${port}!`))

@@ -9,11 +9,12 @@ import {
 }  from "../controllers/auth.js"
 
 
+
 const router = express.Router();
 
 //routes
 //REGISTER || POST
-router.post("/signup", signUp);
+router.post("/signup" , signUp);
 
 // LOGIN || POST
 router.post("/login", login);
