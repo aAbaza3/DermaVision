@@ -81,3 +81,30 @@ export const resizeUserImage = asyncHandler(async (req, res, next) => {
         next(new ApiError('Error processing image upload', 500));
     }
 });
+
+
+export const resizeScanImage = asyncHandler(async (req, res, next) => {
+    if (!req.file) return next(); // Skip لو مفيش صورة
+
+    try {
+        const scanImageFileName = `scan-${uuidv4()}`;
+
+        const buffer = await sharp(req.file.buffer)
+            .resize(1024, 1024, {
+                fit: sharp.fit.cover,
+                position: sharp.strategy.entropy
+            })
+            .toFormat('jpeg')
+            .jpeg({ quality: 90 })
+            .toBuffer();
+
+        const result = await uploadToCloudinary(buffer, scanImageFileName, 'scans');
+
+        req.body.image_url = result.secure_url;
+
+        next();
+    } catch (error) {
+        next(new Error(`Scan Image Upload Error: ${error.message}`));
+    }
+});
+
