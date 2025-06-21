@@ -14,6 +14,14 @@ const scanSchema = new mongoose.Schema({
     type: String, // مثلا: "Head", "Left Arm"
     required: true,
   },
+  diagnosis: {
+    type: String, // e.g. melanoma, nevus, etc.
+    default: 'Pending'
+  },
+  confidence: {
+    type: Number, // e.g. 0.92 (92%)
+    default: null
+  },
   uploadedAt: {
     type: Date,
     default: Date.now,
