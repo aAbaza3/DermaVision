@@ -7,9 +7,6 @@ import { PASSWORD_RESET_REQUEST_TEMPLATE,EMAIL_VERIFICATION_TEMPLATE } from './e
 
 // });
 
-// export const sendWelcomeEmail = asyncHandler(async (email, name) => {
-
-// });
 
 export const sendPasswordResetEmail = asyncHandler(async (to, username, resetCode) => {
     const updatedHtml = PASSWORD_RESET_REQUEST_TEMPLATE
@@ -17,22 +14,22 @@ export const sendPasswordResetEmail = asyncHandler(async (to, username, resetCod
         .replace('{resetCode}', resetCode);
 
     const mailOptions = {
-        from: `DermVision <${process.env.Email_USER}>`,
+        from: `DermaVision <${process.env.Email_USER}>`,
         to: to,
         subject: 'Password Reset Code (Valid for 10 min)',
         html: updatedHtml,
         category: 'Password Reset'
-    }
+    };
 
-    transporter.sendMail(mailOptions);
-    // , (error, info) => {
-    //     if (error) {
-    //         console.error('Error sending email:', error);
-    //     } else {
-    //         console.log('Email sent successfully:', info.response);
-    //     }
-    // });
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Password reset email sent:', info.response);
+    } catch (error) {
+        console.error('Failed to send password reset email:', error);
+    }
 });
+
+
 
 export const sendVerificationEmail = asyncHandler(async (to, username, verificationCode) => {
     const updatedHtml = EMAIL_VERIFICATION_TEMPLATE
@@ -47,5 +44,11 @@ export const sendVerificationEmail = asyncHandler(async (to, username, verificat
         category: 'Email Verification'
     };
 
-    transporter.sendMail(mailOptions);
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Verification email sent:', info.response);
+    } catch (error) {
+        console.error(' Failed to send verification email:', error);
+    }
 });
+

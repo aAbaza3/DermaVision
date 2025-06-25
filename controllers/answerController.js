@@ -1,10 +1,13 @@
 import Answer from  '../models/Answer.js'
 import User from '../models/user.js'
 
+
 // To Save Answers with userid and quations
 export const submitAnswers = async (req, res) => {
   try {
     const { userid, answers } = req.body;
+     console.log("Received user ID:", userid);
+     console.log("Full body:", req.body);
 
     const user = await User.findById(userid);
     if (!user) return res.status(404).json({ error: 'User not found' });
@@ -19,6 +22,9 @@ export const submitAnswers = async (req, res) => {
         return await newAnswer.save();
       })
     );
+  
+
+
 
     res.status(201).json(savedAnswers);
   } catch (err) {

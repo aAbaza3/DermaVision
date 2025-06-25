@@ -11,7 +11,10 @@ const answerSchema = new mongoose.Schema({
     ref: 'Question', 
     required: true 
   },
-  answer: [String],
+   answer: {
+    type: [String], 
+    required: true
+  }
 });
 
 export default mongoose.model('Answer', answerSchema);

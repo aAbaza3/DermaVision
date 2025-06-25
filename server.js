@@ -3,7 +3,7 @@ import dotenv  from 'dotenv/config'
 import connectDb from './config/db.js'
 import auth from'./routes/authRoute.js'
 import questionRoute from './routes/questionRoute.js';
-//import answerRoutes from './routes/answerRoute.js';
+import answerRoutes from './routes/answerRoutes.js';
 import scanRoutes from './routes/scanRoutes.js';
 import cors from "cors";
 
@@ -18,6 +18,7 @@ app.use(express.json());
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/questions', questionRoute);
 app.use('/api/scans', scanRoutes);
+app.use('/api/v1/answers', answerRoutes);
 
 // Error handling middleware (recommended)
 app.use((err, req, res, next) => {
@@ -25,7 +26,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
   });
 
-const port = 8080 || process.env.PORT 
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Server Running on port ${port}!`))
 
