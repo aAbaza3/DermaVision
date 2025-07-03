@@ -13,6 +13,7 @@ const scanSchema = new mongoose.Schema({
   location: {
     type: String, // مثلا: "Head", "Left Arm"
     required: true,
+     enum: ['Head', 'Body', 'Left Arm', 'Right Arm', 'Left Leg', 'Right Leg']
   },
   diagnosis: {
     type: String, // e.g. melanoma, nevus, etc.
@@ -21,6 +22,10 @@ const scanSchema = new mongoose.Schema({
   confidence: {
     type: Number, // e.g. 0.92 (92%)
     default: null
+  },
+    riskLevel: {
+    type: String,
+    default: 'Low'
   },
   uploadedAt: {
     type: Date,

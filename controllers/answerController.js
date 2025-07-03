@@ -28,6 +28,7 @@ export const submitAnswers = async (req, res) => {
 
     res.status(201).json(savedAnswers);
   } catch (err) {
+    console.error("Error in submitAnswers:", err);
     res.status(500).json({ error: 'Something went wrong' });
   }
 };

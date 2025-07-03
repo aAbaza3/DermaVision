@@ -17,14 +17,12 @@ app.use(express.json());
 //Routes
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/questions', questionRoute);
-app.use('/api/scans', scanRoutes);
+app.use('/api/v1/scans', scanRoutes);
 app.use('/api/v1/answers', answerRoutes);
 
-// Error handling middleware (recommended)
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
+import globalErrorHandler from './middleware/errorMiddleware.js';
+app.use(globalErrorHandler);
+
 
 const port = process.env.PORT || 8080;
 

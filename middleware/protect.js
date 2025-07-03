@@ -19,7 +19,7 @@ export const protect = asyncHandler(async (req, res, next) => {
     res.status(401);
     throw new Error('You are not logged in. Please login to access this route.');
   }
-  console.log('✅ Token received:', token);
+  //console.log('✅ Token received:', token);
 
   // 3. Verify token
   const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
